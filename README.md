@@ -1,1 +1,0 @@
-# origin-backend-take-home-assignment
