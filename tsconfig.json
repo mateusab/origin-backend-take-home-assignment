@@ -10,6 +10,12 @@
     "sourceMap": true,
     "outDir": "./dist",
     "baseUrl": "./",
-    "incremental": true
+    "incremental": true,
+    "paths": {
+      "@core": ["src/modules/core"],
+      "@core/*": ["src/modules/core/*"],
+      "@user": ["src/modules/user/*"],
+      "@user/*": ["src/modules/user/*"]
+    }
   }
 }
