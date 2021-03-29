@@ -1,4 +1,6 @@
 export enum InsuranceStatusEnum {
-  INELEGIBLE = 'inelegible',
-  ELEGIBLE = 'elegible',
+  INELIGIBLE = 'inelegible',
+  ECONOMIC = 'economic',
+  REGULAR = 'regular',
+  RESPONSIBLE = 'responsible',
 }
