@@ -6,25 +6,33 @@ export abstract class Insurance {
 
   constructor(
     score = 0,
-    status: InsuranceStatusEnum = InsuranceStatusEnum.INELIGIBLE,
+    status: InsuranceStatusEnum = InsuranceStatusEnum.REGULAR,
   ) {
     this.score = score
     this.status = status
   }
 
-  increase = (points: number): number => (this.score += points)
+  increase(points: number): number {
+    return (this.score += points)
+  }
 
-  decrease = (points: number): number => (this.score -= points)
+  decrease(points: number): number {
+    return (this.score -= points)
+  }
+
+  turnIntoIneligible = (): InsuranceStatusEnum =>
+    (this.status = InsuranceStatusEnum.INELIGIBLE)
 
   defineFinalScore(): InsuranceStatusEnum {
     if (this.status !== InsuranceStatusEnum.INELIGIBLE) {
       if (this.score <= 0) {
-        return (this.status = InsuranceStatusEnum.ECONOMIC)
+        this.status = InsuranceStatusEnum.ECONOMIC
       } else if (this.score >= 1 && this.score <= 2) {
-        return (this.status = InsuranceStatusEnum.REGULAR)
+        this.status = InsuranceStatusEnum.REGULAR
       } else if (this.score >= 3) {
-        return (this.status = InsuranceStatusEnum.RESPONSIBLE)
+        this.status = InsuranceStatusEnum.RESPONSIBLE
       }
     }
+    return this.status
   }
 }

@@ -25,11 +25,71 @@ export class CalculateUserRiskProfileUseCase {
     const disabilityInsurance = new DisabilityInsurance(baseScore)
     const lifeInsurance = new LifeInsurance(baseScore)
 
-    console.log(homeInsurance)
-    console.log(autoInsurance)
-    console.log(disabilityInsurance)
-    console.log(lifeInsurance)
+    if (!user.hasHouse()) {
+      homeInsurance.turnIntoIneligible()
+    }
 
-    return 'Risk'
+    if (!user.hasVehicle()) {
+      autoInsurance.turnIntoIneligible()
+    }
+
+    const isOlderThanSixty = user.isOlderThanSixty()
+
+    if (!user.hasIncome() || isOlderThanSixty) {
+      disabilityInsurance.turnIntoIneligible()
+    }
+
+    if (isOlderThanSixty) {
+      lifeInsurance.turnIntoIneligible()
+    }
+
+    if (user.isUnderThirdy()) {
+      homeInsurance.decrease(2)
+      autoInsurance.decrease(2)
+      disabilityInsurance.decrease(2)
+      lifeInsurance.decrease(2)
+    }
+
+    if (user.isBetweenThirtyAndForty()) {
+      homeInsurance.decrease(1)
+      autoInsurance.decrease(1)
+      disabilityInsurance.decrease(1)
+      lifeInsurance.decrease(1)
+    }
+
+    if (user.isIncomeAbove200k()) {
+      homeInsurance.decrease(1)
+      autoInsurance.decrease(1)
+      disabilityInsurance.decrease(1)
+      lifeInsurance.decrease(1)
+    }
+
+    if (user.house.ownership_status === 'mortgaged') {
+      homeInsurance.increase(1)
+      disabilityInsurance.increase(1)
+    }
+
+    if (user.hasDependents()) {
+      disabilityInsurance.increase(1)
+      lifeInsurance.increase(1)
+    }
+
+    if (user.isMarried()) {
+      lifeInsurance.increase(1)
+      disabilityInsurance.decrease(1)
+    }
+
+    const actualYear = new Date().getFullYear()
+
+    if (actualYear - user.vehicle.year <= 5) {
+      autoInsurance.increase(1)
+    }
+
+    return {
+      auto: autoInsurance.defineFinalScore(),
+      disability: disabilityInsurance.defineFinalScore(),
+      home: homeInsurance.defineFinalScore(),
+      life: lifeInsurance.defineFinalScore(),
+    }
   }
 }
