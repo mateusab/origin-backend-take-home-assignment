@@ -25,7 +25,9 @@ class Vehicle {
 
 class House {
   @IsDefined()
-  @IsEnum(OwnershipStatusEnum)
+  @IsEnum(OwnershipStatusEnum, {
+    message: 'ownership_status must be owned or mortgaged',
+  })
   ownership_status: OwnershipStatusEnum
 }
 export class CalculateUserRiskProfileInput {
@@ -36,7 +38,7 @@ export class CalculateUserRiskProfileInput {
 
   @IsDefined()
   @IsNumber()
-  @Min(0, { message: 'Mínimo de dependentes tem que ser 0' })
+  @Min(0, { message: 'The minimal number of dependents must be zero.' })
   dependents: number
 
   @IsOptional()
@@ -47,20 +49,22 @@ export class CalculateUserRiskProfileInput {
 
   @IsDefined()
   @IsNumber()
-  @Min(0, { message: 'Mínimo de incomes tem que ser 0' })
+  @Min(0, { message: 'The minimal number of incomes must be zero.' })
   income: number
 
   @IsDefined()
-  @IsEnum(MaritalStatusEnum)
+  @IsEnum(MaritalStatusEnum, {
+    message: `Marital status should be "single" or "married"`,
+  })
   marital_status: MaritalStatusEnum
 
   @IsDefined()
   @IsArray({ message: 'risk_questions must be an array' })
-  @ArrayMinSize(3, { message: 'risk_questions must be length 3' })
-  @ArrayMaxSize(3, { message: 'risk_questions must be lenght 3' })
+  @ArrayMinSize(3, { message: 'risk_questions must have three positions.' })
+  @ArrayMaxSize(3, { message: 'risk_questions must have three positions.' })
   @IsBoolean({
     each: true,
-    message: 'Each value in risk_questions must be a boolean value!!',
+    message: 'Each value in risk_questions must be a boolean value.',
   })
   risk_questions: boolean[]
 
