@@ -4,7 +4,7 @@ describe('User', () => {
   let user: User
 
   describe('isOlderThanSixty', () => {
-    describe('user age is greather than 60', () => {
+    describe('user is older than 60 years', () => {
       it('returns true', () => {
         user = createUserMock({ age: 65 })
 
@@ -14,7 +14,7 @@ describe('User', () => {
       })
     })
 
-    describe('user age isnt greather than 60', () => {
+    describe('user isnt older than 60 years', () => {
       it('returns false', () => {
         user = createUserMock({ age: 30 })
 

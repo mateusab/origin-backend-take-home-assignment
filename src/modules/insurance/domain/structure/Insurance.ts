@@ -4,7 +4,6 @@ import { InsuranceStatusEnum } from 'src/modules/insurance/enums/InsuranceStatus
 export abstract class Insurance {
   user: User
   score: number
-  status: InsuranceStatusEnum
 
   constructor(user: User, score = 0) {
     this.user = user
@@ -55,19 +54,13 @@ export abstract class Insurance {
     return (this.score -= points)
   }
 
-  turnIntoIneligible = (): InsuranceStatusEnum =>
-    (this.status = InsuranceStatusEnum.INELIGIBLE)
-
   defineFinalRiskLine(): InsuranceStatusEnum {
-    if (this.status !== InsuranceStatusEnum.INELIGIBLE) {
-      if (this.score <= 0) {
-        this.status = InsuranceStatusEnum.ECONOMIC
-      } else if (this.score >= 1 && this.score <= 2) {
-        this.status = InsuranceStatusEnum.REGULAR
-      } else if (this.score >= 3) {
-        this.status = InsuranceStatusEnum.RESPONSIBLE
-      }
+    if (this.score <= 0) {
+      return InsuranceStatusEnum.ECONOMIC
+    } else if (this.score >= 1 && this.score <= 2) {
+      return InsuranceStatusEnum.REGULAR
+    } else if (this.score >= 3) {
+      return InsuranceStatusEnum.RESPONSIBLE
     }
-    return this.status
   }
 }
