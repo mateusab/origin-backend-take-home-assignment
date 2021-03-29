@@ -11,6 +11,7 @@ import { CalculateUserHomeInsuranceRiskProfileUseCase } from '@user/application/
 import { CalculateUserAutoInsuranceRiskProfileUseCase } from '@user/application/usecase/CalculateUserAutoInsuranceRiskProfileUseCase/CalculateUserAutoInsuranceRiskProfileUseCase'
 import { CalculateUserLifeInsuranceRiskProfileUseCase } from '@user/application/usecase/CalculateUserLifeInsuranceRiskProfileUseCase/CalculateUserLifeInsuranceRiskProfileUseCase'
 import { CalculateUserDisabilityInsuranceRiskProfileUseCase } from '@user/application/usecase/CalculateUserDisabilityInsuranceRiskProfileUseCase/CalculateUserDisabilityInsuranceRiskProfileUseCase'
+import { CalculateUserRiskProfileOutput } from '@user/application/usecase/CalculateUserRiskProfileUseCase/CalculateUserRiskProfileOutput'
 
 @Injectable()
 export class CalculateUserRiskProfileUseCase {
@@ -23,7 +24,9 @@ export class CalculateUserRiskProfileUseCase {
     private readonly calculateUserLifeInsuranceRiskProfile: CalculateUserLifeInsuranceRiskProfileUseCase,
     private readonly calculateUserDisabilityInsuranceRiskProfile: CalculateUserDisabilityInsuranceRiskProfileUseCase,
   ) {}
-  execute(input: CalculateUserRiskProfileInput): any {
+  execute(
+    input: CalculateUserRiskProfileInput,
+  ): CalculateUserRiskProfileOutput {
     const house = this.createNewHouse.execute(input.house)
     const vehicle = this.createNewVehicle.execute(input.vehicle)
     const user = this.createNewUser.execute(input, house, vehicle)
