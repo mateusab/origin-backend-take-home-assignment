@@ -6,14 +6,9 @@ export abstract class Insurance {
   score: number
   status: InsuranceStatusEnum
 
-  constructor(
-    user: User,
-    score = 0,
-    status: InsuranceStatusEnum = InsuranceStatusEnum.REGULAR,
-  ) {
+  constructor(user: User, score = 0) {
     this.user = user
     this.score = score
-    this.status = status
   }
 
   decreaseIfIsOlderThanSixty(points: number): number {
