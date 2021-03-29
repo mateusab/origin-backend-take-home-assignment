@@ -7,6 +7,10 @@ import { LifeInsurance } from 'src/modules/insurance/domain/structure/LifeInsura
 import { CreateNewVehicleUseCase } from 'src/modules/vehicle/application/usecase/CreateNewVehicleUseCase'
 import { CreateNewHouseUseCase } from 'src/modules/house/application/usecase/CreateNewHouseUseCase/CreateNewHouseUseCase'
 import { CreateNewUserUseCase } from '@user/application/usecase/CreateNewUserUseCase/CreateNewUserUseCase'
+import { CalculateUserHomeInsuranceRiskProfileUseCase } from '@user/application/usecase/CalculateUserHomeInsuranceRiskProfileUseCase/CalculateUserHomeInsuranceRiskProfileUseCase'
+import { CalculateUserAutoInsuranceRiskProfileUseCase } from '@user/application/usecase/CalculateUserAutoInsuranceRiskProfileUseCase/CalculateUserAutoInsuranceRiskProfileUseCase'
+import { CalculateUserLifeInsuranceRiskProfileUseCase } from '@user/application/usecase/CalculateUserLifeInsuranceRiskProfileUseCase/CalculateUserLifeInsuranceRiskProfileUseCase'
+import { CalculateUserDisabilityInsuranceRiskProfileUseCase } from '@user/application/usecase/CalculateUserDisabilityInsuranceRiskProfileUseCase/CalculateUserDisabilityInsuranceRiskProfileUseCase'
 
 @Injectable()
 export class CalculateUserRiskProfileUseCase {
@@ -14,6 +18,10 @@ export class CalculateUserRiskProfileUseCase {
     private readonly createNewVehicle: CreateNewVehicleUseCase,
     private readonly createNewHouse: CreateNewHouseUseCase,
     private readonly createNewUser: CreateNewUserUseCase,
+    private readonly calculateUserHomeInsuranceRiskProfile: CalculateUserHomeInsuranceRiskProfileUseCase,
+    private readonly calculateUserAutoInsuranceRiskProfile: CalculateUserAutoInsuranceRiskProfileUseCase,
+    private readonly calculateUserLifeInsuranceRiskProfile: CalculateUserLifeInsuranceRiskProfileUseCase,
+    private readonly calculateUserDisabilityInsuranceRiskProfile: CalculateUserDisabilityInsuranceRiskProfileUseCase,
   ) {}
   execute(input: CalculateUserRiskProfileInput): any {
     const house = this.createNewHouse.execute(input.house)
@@ -21,74 +29,18 @@ export class CalculateUserRiskProfileUseCase {
     const user = this.createNewUser.execute(input, house, vehicle)
 
     const baseScore = user.calculateBaseScore()
-    const homeInsurance = new HomeInsurance(baseScore)
-    const autoInsurance = new AutoInsurance(baseScore)
-    const disabilityInsurance = new DisabilityInsurance(baseScore)
-    const lifeInsurance = new LifeInsurance(baseScore)
-
-    if (!user.hasHouse()) {
-      homeInsurance.turnIntoIneligible()
-    }
-
-    if (!user.hasVehicle()) {
-      autoInsurance.turnIntoIneligible()
-    }
-
-    const isOlderThanSixty = user.isOlderThanSixty()
-
-    if (!user.hasIncome() || isOlderThanSixty) {
-      disabilityInsurance.turnIntoIneligible()
-    }
-
-    if (isOlderThanSixty) {
-      lifeInsurance.turnIntoIneligible()
-    }
-
-    if (user.isUnderThirdy()) {
-      homeInsurance.decrease(2)
-      autoInsurance.decrease(2)
-      disabilityInsurance.decrease(2)
-      lifeInsurance.decrease(2)
-    }
-
-    if (user.isBetweenThirtyAndForty()) {
-      homeInsurance.decrease(1)
-      autoInsurance.decrease(1)
-      disabilityInsurance.decrease(1)
-      lifeInsurance.decrease(1)
-    }
-
-    if (user.isIncomeAbove200k()) {
-      homeInsurance.decrease(1)
-      autoInsurance.decrease(1)
-      disabilityInsurance.decrease(1)
-      lifeInsurance.decrease(1)
-    }
-
-    if (house.isHouseMortgaged()) {
-      homeInsurance.increase(1)
-      disabilityInsurance.increase(1)
-    }
-
-    if (user.hasDependents()) {
-      disabilityInsurance.increase(1)
-      lifeInsurance.increase(1)
-    }
-
-    if (user.isMarried()) {
-      lifeInsurance.increase(1)
-      disabilityInsurance.decrease(1)
-    }
-
-    if (vehicle.wasVehicleProducedInLastFiveYears()) {
-      autoInsurance.increase(1)
-    }
+    const autoInsurance = new AutoInsurance(user, baseScore)
+    const disabilityInsurance = new DisabilityInsurance(user, baseScore)
+    const homeInsurance = new HomeInsurance(user, baseScore)
+    const lifeInsurance = new LifeInsurance(user, baseScore)
 
     return {
-      auto: autoInsurance.defineFinalScore(),
-      disability: disabilityInsurance.defineFinalScore(),
-      home: homeInsurance.defineFinalScore(),
-      life: lifeInsurance.defineFinalScore(),
+      auto: this.calculateUserAutoInsuranceRiskProfile.execute(autoInsurance),
+      disability: this.calculateUserDisabilityInsuranceRiskProfile.execute(
+        disabilityInsurance,
+      ),
+      home: this.calculateUserHomeInsuranceRiskProfile.execute(homeInsurance),
+      life: this.calculateUserLifeInsuranceRiskProfile.execute(lifeInsurance),
     }
   }
 }

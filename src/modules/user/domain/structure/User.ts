@@ -38,15 +38,9 @@ export class User {
 
   isOlderThanSixty = (): boolean => this.age > 60
 
-  isUnderThirdy = (): boolean => this.age < 30
-
-  isBetweenThirtyAndForty = (): boolean => this.age >= 30 && this.age <= 40
-
   hasHouse = (): boolean => (this.house ? true : false)
 
   hasIncome = (): boolean => (this.income > 0 ? true : false)
-
-  isIncomeAbove200k = (): boolean => this.income > 200000
 
   hasDependents = (): boolean => this.dependents > 0
 
