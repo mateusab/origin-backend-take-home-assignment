@@ -14,7 +14,6 @@ export class CalculateUserRiskProfileUseCase {
     )
 
     console.log(user)
-
     return 'Risk profile'
   }
 }
