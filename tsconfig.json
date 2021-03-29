@@ -14,7 +14,7 @@
     "paths": {
       "@core": ["src/modules/core"],
       "@core/*": ["src/modules/core/*"],
-      "@user": ["src/modules/user/*"],
+      "@user": ["src/modules/user"],
       "@user/*": ["src/modules/user/*"]
     }
   }
