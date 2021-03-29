@@ -5,18 +5,28 @@ import { HomeInsurance } from 'src/modules/insurance/domain/structure/HomeInsura
 import { AutoInsurance } from 'src/modules/insurance/domain/structure/AutoInsurance'
 import { DisabilityInsurance } from 'src/modules/insurance/domain/structure/DisabilityInsurance'
 import { LifeInsurance } from 'src/modules/insurance/domain/structure/LifeInsurance'
+import { House } from 'src/modules/house/domain/structure/House'
+import { Vehicle } from 'src/modules/vehicle/Vehicle'
 
 @Injectable()
 export class CalculateUserRiskProfileUseCase {
   execute(input: CalculateUserRiskProfileInput): any {
+    const house = input.house
+      ? new House(input.house.ownership_status)
+      : new House()
+
+    const vehicle = input.vehicle
+      ? new Vehicle(input.vehicle.year)
+      : new Vehicle()
+
     const user = new User(
       input.age,
       input.dependents,
       input.income,
       input.marital_status,
       input.risk_questions,
-      input.house,
-      input.vehicle,
+      house,
+      vehicle,
     )
 
     const baseScore = user.calculateBaseScore()
@@ -64,7 +74,7 @@ export class CalculateUserRiskProfileUseCase {
       lifeInsurance.decrease(1)
     }
 
-    if (user.house.ownership_status === 'mortgaged') {
+    if (house.isHouseMortgaged()) {
       homeInsurance.increase(1)
       disabilityInsurance.increase(1)
     }
@@ -79,9 +89,7 @@ export class CalculateUserRiskProfileUseCase {
       disabilityInsurance.decrease(1)
     }
 
-    const actualYear = new Date().getFullYear()
-
-    if (actualYear - user.vehicle.year <= 5) {
+    if (vehicle.wasVehicleProducedInLastFiveYears()) {
       autoInsurance.increase(1)
     }
 
