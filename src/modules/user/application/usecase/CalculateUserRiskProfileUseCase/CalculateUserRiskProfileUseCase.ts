@@ -1,33 +1,24 @@
 import { Injectable } from '@nestjs/common'
-import { User } from '@user/domain/structure/User'
 import { CalculateUserRiskProfileInput } from '@user/application/usecase/CalculateUserRiskProfileUseCase/CalculateUserRiskProfileInput'
 import { HomeInsurance } from 'src/modules/insurance/domain/structure/HomeInsurance'
 import { AutoInsurance } from 'src/modules/insurance/domain/structure/AutoInsurance'
 import { DisabilityInsurance } from 'src/modules/insurance/domain/structure/DisabilityInsurance'
 import { LifeInsurance } from 'src/modules/insurance/domain/structure/LifeInsurance'
-import { House } from 'src/modules/house/domain/structure/House'
-import { Vehicle } from 'src/modules/vehicle/Vehicle'
+import { CreateNewVehicleUseCase } from 'src/modules/vehicle/application/usecase/CreateNewVehicleUseCase'
+import { CreateNewHouseUseCase } from 'src/modules/house/application/usecase/CreateNewHouseUseCase/CreateNewHouseUseCase'
+import { CreateNewUserUseCase } from '@user/application/usecase/CreateNewUserUseCase/CreateNewUserUseCase'
 
 @Injectable()
 export class CalculateUserRiskProfileUseCase {
+  constructor(
+    private readonly createNewVehicle: CreateNewVehicleUseCase,
+    private readonly createNewHouse: CreateNewHouseUseCase,
+    private readonly createNewUser: CreateNewUserUseCase,
+  ) {}
   execute(input: CalculateUserRiskProfileInput): any {
-    const house = input.house
-      ? new House(input.house.ownership_status)
-      : new House()
-
-    const vehicle = input.vehicle
-      ? new Vehicle(input.vehicle.year)
-      : new Vehicle()
-
-    const user = new User(
-      input.age,
-      input.dependents,
-      input.income,
-      input.marital_status,
-      input.risk_questions,
-      house,
-      vehicle,
-    )
+    const house = this.createNewHouse.execute(input.house)
+    const vehicle = this.createNewVehicle.execute(input.vehicle)
+    const user = this.createNewUser.execute(input, house, vehicle)
 
     const baseScore = user.calculateBaseScore()
     const homeInsurance = new HomeInsurance(baseScore)

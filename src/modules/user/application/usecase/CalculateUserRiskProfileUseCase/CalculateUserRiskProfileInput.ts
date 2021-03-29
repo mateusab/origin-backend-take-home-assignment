@@ -17,13 +17,13 @@ import {
 import { OwnershipStatusEnum } from 'src/modules/house/enums/OwnershipStatusEnum'
 import { ErrorMessages } from 'src/utils/ErrorMessages'
 
-class Vehicle {
+export class VehicleInput {
   @IsDefined()
   @IsNumber()
   year: number
 }
 
-class House {
+export class HouseInput {
   @IsDefined()
   @IsEnum(OwnershipStatusEnum, {
     message: 'ownership_status must be owned or mortgaged',
@@ -43,9 +43,9 @@ export class CalculateUserRiskProfileInput {
 
   @IsOptional()
   @ValidateNested()
-  @IsInstance(House)
-  @Type(() => House)
-  house?: House
+  @IsInstance(HouseInput)
+  @Type(() => HouseInput)
+  house?: HouseInput
 
   @IsDefined()
   @IsNumber()
@@ -70,7 +70,7 @@ export class CalculateUserRiskProfileInput {
 
   @IsOptional()
   @ValidateNested()
-  @IsInstance(Vehicle)
-  @Type(() => Vehicle)
-  vehicle?: Vehicle
+  @IsInstance(VehicleInput)
+  @Type(() => VehicleInput)
+  vehicle?: VehicleInput
 }
