@@ -22,7 +22,7 @@ export class CreateNewUserUseCase {
     )
   }
 
-  private mapToBoolean(risk_questions: number[]) {
+  private mapToBoolean(risk_questions: number[]): boolean[] {
     return risk_questions.map(risk_question => (risk_question ? true : false))
   }
 }
