@@ -1,6 +1,13 @@
-import { Body, Controller, Get, UsePipes, ValidationPipe } from '@nestjs/common'
+import {
+  Body,
+  Controller,
+  Post,
+  Res,
+  UsePipes,
+  ValidationPipe,
+} from '@nestjs/common'
+import { Response } from 'express'
 import { CalculateUserRiskProfileInput } from 'src/modules/user/application/usecase/CalculateUserRiskProfileUseCase/CalculateUserRiskProfileInput'
-import { CalculateUserRiskProfileOutput } from 'src/modules/user/application/usecase/CalculateUserRiskProfileUseCase/CalculateUserRiskProfileOutput'
 import { CalculateUserRiskProfileUseCase } from 'src/modules/user/application/usecase/CalculateUserRiskProfileUseCase/CalculateUserRiskProfileUseCase'
 
 @Controller('/user')
@@ -9,10 +16,13 @@ export class UserController {
   constructor(
     private readonly calculateUserRiskProfileUseCase: CalculateUserRiskProfileUseCase,
   ) {}
-  @Get('risk/calculate')
+  @Post('risk/calculate')
   calculateUserRiskProfile(
     @Body() input: CalculateUserRiskProfileInput,
-  ): CalculateUserRiskProfileOutput {
-    return this.calculateUserRiskProfileUseCase.execute(input)
+    @Res() res: Response,
+  ) {
+    const response = this.calculateUserRiskProfileUseCase.execute(input)
+
+    res.status(200).send(response)
   }
 }

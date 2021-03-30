@@ -32,6 +32,7 @@ export class CalculateUserRiskProfileUseCase {
     const user = this.createNewUser.execute(input, house, vehicle)
 
     const baseScore = user.calculateBaseScore()
+
     const autoInsurance = new AutoInsurance(user, baseScore)
     const disabilityInsurance = new DisabilityInsurance(user, baseScore)
     const homeInsurance = new HomeInsurance(user, baseScore)

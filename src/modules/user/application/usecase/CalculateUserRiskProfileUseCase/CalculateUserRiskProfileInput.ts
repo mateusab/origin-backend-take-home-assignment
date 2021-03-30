@@ -4,13 +4,13 @@ import {
   ArrayMaxSize,
   ArrayMinSize,
   IsArray,
-  IsBoolean,
   IsDefined,
   IsEnum,
   IsInstance,
   IsNumber,
   IsOptional,
   IsPositive,
+  Max,
   Min,
   ValidateNested,
 } from 'class-validator'
@@ -62,11 +62,9 @@ export class CalculateUserRiskProfileInput {
   @IsArray({ message: 'risk_questions must be an array' })
   @ArrayMinSize(3, { message: 'risk_questions must have three positions.' })
   @ArrayMaxSize(3, { message: 'risk_questions must have three positions.' })
-  @IsBoolean({
-    each: true,
-    message: 'Each value in risk_questions must be a boolean value.',
-  })
-  risk_questions: boolean[]
+  @Min(0, { each: true })
+  @Max(1, { each: true })
+  risk_questions: number[]
 
   @IsOptional()
   @ValidateNested()

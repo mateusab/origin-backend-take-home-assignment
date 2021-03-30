@@ -32,7 +32,7 @@ export class User {
   }
 
   calculateBaseScore = (): number =>
-    this.risk_answers.filter(risk_answer => risk_answer === true).length
+    this.risk_answers.filter(risk_answer => risk_answer).length
 
   hasVehicle = (): boolean => (this.vehicle ? true : false)
 
