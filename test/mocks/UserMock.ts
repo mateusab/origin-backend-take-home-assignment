@@ -1,5 +1,5 @@
-import { MaritalStatusEnum } from '@user/enums/MaritalStatusEnum'
-import { User } from '@user/domain/structure/User'
+import { User } from 'src/modules/user/domain/structure/User'
+import { MaritalStatusEnum } from 'src/modules/user/enums/MaritalStatusEnum'
 
 export const createUserMock = (params?: Partial<User>): User => {
   const age = 35

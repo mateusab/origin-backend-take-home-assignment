@@ -1,4 +1,4 @@
-import { MaritalStatusEnum } from '@user/enums/MaritalStatusEnum'
+import { MaritalStatusEnum } from 'src/modules/user/enums/MaritalStatusEnum'
 import { House } from 'src/modules/house/domain/structure/House'
 import { Insurance } from 'src/modules/insurance/domain/structure/Insurance'
 import { Vehicle } from 'src/modules/vehicle/Vehicle'

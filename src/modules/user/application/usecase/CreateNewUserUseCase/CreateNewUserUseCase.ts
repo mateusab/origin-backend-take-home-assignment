@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common'
-import { CalculateUserRiskProfileInput } from '@user/application/usecase/CalculateUserRiskProfileUseCase/CalculateUserRiskProfileInput'
-import { User } from '@user/domain/structure/User'
+import { CalculateUserRiskProfileInput } from 'src/modules/user/application/usecase/CalculateUserRiskProfileUseCase/CalculateUserRiskProfileInput'
+import { User } from 'src/modules/user/domain/structure/User'
 import { House } from 'src/modules/house/domain/structure/House'
 import { Vehicle } from 'src/modules/vehicle/Vehicle'
 

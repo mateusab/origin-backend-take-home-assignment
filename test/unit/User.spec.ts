@@ -1,4 +1,4 @@
-import { User } from '@user/domain/structure/User'
+import { User } from 'src/modules/user/domain/structure/User'
 import { createUserMock } from 'test/mocks/UserMock'
 describe('User', () => {
   let user: User

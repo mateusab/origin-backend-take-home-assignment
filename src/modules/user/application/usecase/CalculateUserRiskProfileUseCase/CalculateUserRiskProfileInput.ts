@@ -1,4 +1,4 @@
-import { MaritalStatusEnum } from '@user/enums/MaritalStatusEnum'
+import { MaritalStatusEnum } from 'src/modules/user/enums/MaritalStatusEnum'
 import { Type } from 'class-transformer'
 import {
   ArrayMaxSize,

@@ -1,7 +1,7 @@
 import { Body, Controller, Get, UsePipes, ValidationPipe } from '@nestjs/common'
-import { CalculateUserRiskProfileInput } from '@user/application/usecase/CalculateUserRiskProfileUseCase/CalculateUserRiskProfileInput'
-import { CalculateUserRiskProfileOutput } from '@user/application/usecase/CalculateUserRiskProfileUseCase/CalculateUserRiskProfileOutput'
-import { CalculateUserRiskProfileUseCase } from '@user/application/usecase/CalculateUserRiskProfileUseCase/CalculateUserRiskProfileUseCase'
+import { CalculateUserRiskProfileInput } from 'src/modules/user/application/usecase/CalculateUserRiskProfileUseCase/CalculateUserRiskProfileInput'
+import { CalculateUserRiskProfileOutput } from 'src/modules/user/application/usecase/CalculateUserRiskProfileUseCase/CalculateUserRiskProfileOutput'
+import { CalculateUserRiskProfileUseCase } from 'src/modules/user/application/usecase/CalculateUserRiskProfileUseCase/CalculateUserRiskProfileUseCase'
 
 @Controller('/user')
 @UsePipes(new ValidationPipe())

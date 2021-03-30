@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common'
-import { HouseInput } from '@user/application/usecase/CalculateUserRiskProfileUseCase/CalculateUserRiskProfileInput'
+import { HouseInput } from 'src/modules/user/application/usecase/CalculateUserRiskProfileUseCase/CalculateUserRiskProfileInput'
 import { House } from 'src/modules/house/domain/structure/House'
 
 @Injectable()
