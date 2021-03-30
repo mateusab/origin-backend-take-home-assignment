@@ -16,9 +16,13 @@ export class CreateNewUserUseCase {
       input.dependents,
       input.income,
       input.marital_status,
-      input.risk_questions,
+      this.mapToBoolean(input.risk_questions),
       house,
       vehicle,
     )
+  }
+
+  private mapToBoolean(risk_questions: number[]) {
+    return risk_questions.map(risk_question => (risk_question ? true : false))
   }
 }
