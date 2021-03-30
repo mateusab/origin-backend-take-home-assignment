@@ -10,10 +10,7 @@ export class CalculateUserAutoInsuranceRiskProfileUseCase {
     autoInsurance.decreaseIfAgeIsUnderThirty(2)
     autoInsurance.decreaseIfAgeIsBetweenThirtyAndForty(1)
     autoInsurance.decreaseIfIncomeIsAbove200k(1)
-
-    if (autoInsurance.user.vehicle.wasVehicleProducedInLastFiveYears()) {
-      autoInsurance.increase(1)
-    }
+    autoInsurance.increaseIfVehicleWasProducedInLastFiveYears(1)
 
     return autoInsurance.defineFinalRiskLine()
   }
