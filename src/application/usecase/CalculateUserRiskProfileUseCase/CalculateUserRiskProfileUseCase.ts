@@ -58,12 +58,15 @@ export class CalculateUserRiskProfileUseCase {
     house: House,
     vehicle: Vehicle,
   ): User {
+    const risk_questions = this.mapRiskQuestionsFromInputToBoolean(
+      input.risk_questions,
+    )
     return new User(
       input.age,
       input.dependents,
       input.income,
       input.marital_status,
-      this.mapRiskQuestionsFromInputToBoolean(input.risk_questions),
+      risk_questions,
       house,
       vehicle,
     )
@@ -72,6 +75,6 @@ export class CalculateUserRiskProfileUseCase {
   private mapRiskQuestionsFromInputToBoolean(
     risk_questions: number[],
   ): boolean[] {
-    return risk_questions.map(risk_question => (risk_question ? true : false))
+    return risk_questions.map(risk_question => risk_question === 1)
   }
 }

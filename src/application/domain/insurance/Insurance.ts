@@ -10,12 +10,6 @@ export abstract class Insurance {
     this.score = score
   }
 
-  decreaseIfIsOlderThanSixty(points: number): number {
-    if (this.user.age > 60) {
-      return (this.score -= points)
-    }
-  }
-
   decreaseIfAgeIsBetweenThirtyAndForty(points: number): number {
     if (this.user.age >= 30 && this.user.age <= 40) {
       return (this.score -= points)
@@ -42,12 +36,6 @@ export abstract class Insurance {
 
   increaseIfHasDependents(points: number): number {
     if (this.user.hasDependents()) {
-      return (this.score += points)
-    }
-  }
-
-  increaseIfIsMarried(points: number): number {
-    if (this.user.isMarried()) {
       return (this.score += points)
     }
   }
