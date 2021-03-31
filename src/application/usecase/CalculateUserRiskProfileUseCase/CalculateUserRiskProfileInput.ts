@@ -15,7 +15,6 @@ import {
   ValidateNested,
 } from 'class-validator'
 import { OwnershipStatusEnum } from 'src/application/domain/house/OwnershipStatusEnum'
-import { ErrorMessages } from 'src/utils/ErrorMessages'
 
 export class VehicleInput {
   @IsDefined()
