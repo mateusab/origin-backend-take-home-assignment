@@ -34,13 +34,13 @@ export class User {
   calculateBaseScore = (): number =>
     this.risk_answers.filter(risk_answer => risk_answer).length
 
-  hasVehicle = (): boolean => (this.vehicle ? true : false)
+  hasVehicle = (): boolean => this.vehicle.year !== undefined
 
   isOlderThanSixty = (): boolean => this.age > 60
 
-  hasHouse = (): boolean => (this.house ? true : false)
+  hasHouse = (): boolean => this.house.ownership_status !== undefined
 
-  hasIncome = (): boolean => (this.income > 0 ? true : false)
+  hasIncome = (): boolean => this.income > 0
 
   hasDependents = (): boolean => this.dependents > 0
 

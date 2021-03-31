@@ -46,12 +46,10 @@ export abstract class Insurance {
     }
   }
 
-  increase(points: number): number {
-    return (this.score += points)
-  }
-
-  decrease(points: number): number {
-    return (this.score -= points)
+  increaseIfIsMarried(points: number): number {
+    if (this.user.isMarried()) {
+      return (this.score += points)
+    }
   }
 
   defineFinalRiskLine(): InsuranceStatusEnum {
