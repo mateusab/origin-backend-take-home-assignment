@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common'
-import { DisabilityInsurance } from 'src/application/domain/insurance/DisabilityInsurance'
-import { InsuranceStatusEnum } from 'src/application/domain/insurance/enums/InsuranceStatusEnum'
+import { DisabilityInsurance } from 'src/domain/insurance/DisabilityInsurance'
+import { InsuranceStatusEnum } from 'src/domain/insurance/enums/InsuranceStatusEnum'
 
 @Injectable()
 export class CalculateUserDisabilityInsuranceRiskProfileUseCase {
@@ -18,5 +18,7 @@ export class CalculateUserDisabilityInsuranceRiskProfileUseCase {
     disabilityInsurance.increaseIfHouseIsMortgaged(1)
     disabilityInsurance.increaseIfHasDependents(1)
     disabilityInsurance.decreaseIfUserIsMarried(1)
+
+    return disabilityInsurance.defineFinalRiskLine()
   }
 }

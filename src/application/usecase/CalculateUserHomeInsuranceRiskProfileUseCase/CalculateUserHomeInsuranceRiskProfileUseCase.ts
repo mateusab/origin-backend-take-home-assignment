@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common'
-import { HomeInsurance } from 'src/application/domain/insurance/HomeInsurance'
-import { InsuranceStatusEnum } from 'src/application/domain/insurance/enums/InsuranceStatusEnum'
+import { HomeInsurance } from 'src/domain/insurance/HomeInsurance'
+import { InsuranceStatusEnum } from 'src/domain/insurance/enums/InsuranceStatusEnum'
 
 @Injectable()
 export class CalculateUserHomeInsuranceRiskProfileUseCase {

@@ -1,5 +1,5 @@
-import { InsuranceStatusEnum } from 'src/application/domain/insurance/enums/InsuranceStatusEnum'
-import { User } from 'src/application/domain/user/User'
+import { InsuranceStatusEnum } from 'src/domain/insurance/enums/InsuranceStatusEnum'
+import { User } from 'src/domain/user/User'
 
 export abstract class Insurance {
   user: User

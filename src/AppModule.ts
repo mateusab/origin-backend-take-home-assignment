@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common'
-import { UserController } from 'src/application/input/controllers/UserController'
+import { UserController } from 'src/input/controllers/UserController'
 import { CalculateUserAutoInsuranceRiskProfileUseCase } from 'src/application/usecase/CalculateUserAutoInsuranceRiskProfileUseCase/CalculateUserAutoInsuranceRiskProfileUseCase'
 import { CalculateUserDisabilityInsuranceRiskProfileUseCase } from 'src/application/usecase/CalculateUserDisabilityInsuranceRiskProfileUseCase/CalculateUserDisabilityInsuranceRiskProfileUseCase'
 import { CalculateUserHomeInsuranceRiskProfileUseCase } from 'src/application/usecase/CalculateUserHomeInsuranceRiskProfileUseCase/CalculateUserHomeInsuranceRiskProfileUseCase'

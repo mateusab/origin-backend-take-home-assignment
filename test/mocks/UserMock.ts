@@ -1,5 +1,5 @@
-import { MaritalStatusEnum } from 'src/application/domain/user/MaritalStatusEnum'
-import { User } from 'src/application/domain/user/User'
+import { MaritalStatusEnum } from 'src/domain/user/MaritalStatusEnum'
+import { User } from 'src/domain/user/User'
 
 export const createUserMock = (params?: Partial<User>): User => {
   const age = 35

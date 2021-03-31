@@ -1,4 +1,4 @@
-import { MaritalStatusEnum } from 'src/application/domain/user/MaritalStatusEnum'
+import { MaritalStatusEnum } from 'src/domain/user/MaritalStatusEnum'
 import { Type } from 'class-transformer'
 import {
   ArrayMaxSize,
@@ -14,7 +14,7 @@ import {
   Min,
   ValidateNested,
 } from 'class-validator'
-import { OwnershipStatusEnum } from 'src/application/domain/house/OwnershipStatusEnum'
+import { OwnershipStatusEnum } from 'src/domain/house/OwnershipStatusEnum'
 
 export class VehicleInput {
   @IsDefined()

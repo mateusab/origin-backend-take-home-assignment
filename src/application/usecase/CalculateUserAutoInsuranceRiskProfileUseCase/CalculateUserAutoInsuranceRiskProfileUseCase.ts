@@ -1,5 +1,5 @@
-import { AutoInsurance } from 'src/application/domain/insurance/AutoInsurance'
-import { InsuranceStatusEnum } from 'src/application/domain/insurance/enums/InsuranceStatusEnum'
+import { AutoInsurance } from 'src/domain/insurance/AutoInsurance'
+import { InsuranceStatusEnum } from 'src/domain/insurance/enums/InsuranceStatusEnum'
 
 export class CalculateUserAutoInsuranceRiskProfileUseCase {
   execute(autoInsurance: AutoInsurance): InsuranceStatusEnum {

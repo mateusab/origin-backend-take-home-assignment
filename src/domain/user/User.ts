@@ -1,7 +1,7 @@
-import { MaritalStatusEnum } from 'src/application/domain/user/MaritalStatusEnum'
-import { Insurance } from 'src/application/domain/insurance/Insurance'
-import { Vehicle } from 'src/application/domain/vehicle/Vehicle'
-import { House } from 'src/application/domain/house/House'
+import { MaritalStatusEnum } from 'src/domain/user/MaritalStatusEnum'
+import { Insurance } from 'src/domain/insurance/Insurance'
+import { Vehicle } from 'src/domain/vehicle/Vehicle'
+import { House } from 'src/domain/house/House'
 
 export class User {
   age: number

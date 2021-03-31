@@ -1,4 +1,4 @@
-import { Insurance } from 'src/application/domain/insurance/Insurance'
+import { Insurance } from 'src/domain/insurance/Insurance'
 
 export class LifeInsurance extends Insurance {
   increaseIfUserIsMarried(points: number): number {

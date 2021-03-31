@@ -1,4 +1,4 @@
-import { InsuranceStatusEnum } from 'src/application/domain/insurance/enums/InsuranceStatusEnum'
+import { InsuranceStatusEnum } from 'src/domain/insurance/enums/InsuranceStatusEnum'
 
 export interface CalculateUserRiskProfileOutput {
   auto: InsuranceStatusEnum

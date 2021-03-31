@@ -1,4 +1,4 @@
-import { OwnershipStatusEnum } from 'src/application/domain/house/OwnershipStatusEnum'
+import { OwnershipStatusEnum } from 'src/domain/house/OwnershipStatusEnum'
 
 export class House {
   ownership_status: OwnershipStatusEnum

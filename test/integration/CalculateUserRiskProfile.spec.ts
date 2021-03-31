@@ -1,10 +1,10 @@
 import { CalculateUserRiskProfileInput } from 'src/application/usecase/CalculateUserRiskProfileUseCase/CalculateUserRiskProfileInput'
-import { OwnershipStatusEnum } from 'src/application/domain/house/OwnershipStatusEnum'
-import { MaritalStatusEnum } from 'src/application/domain/user/MaritalStatusEnum'
+import { OwnershipStatusEnum } from 'src/domain/house/OwnershipStatusEnum'
+import { MaritalStatusEnum } from 'src/domain/user/MaritalStatusEnum'
 import IntegrationTestSetup, {
   TestSetupInterface,
 } from 'test/integration/config/IntegrationTestSetup'
-import { InsuranceStatusEnum } from 'src/application/domain/insurance/enums/InsuranceStatusEnum'
+import { InsuranceStatusEnum } from 'src/domain/insurance/enums/InsuranceStatusEnum'
 
 describe('User :: Calculate Risk Profile', () => {
   let setup: TestSetupInterface
