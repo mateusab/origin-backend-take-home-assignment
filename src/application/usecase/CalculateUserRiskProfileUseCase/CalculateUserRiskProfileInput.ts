@@ -33,7 +33,7 @@ export class HouseInput {
 export class CalculateUserRiskProfileInput {
   @IsDefined()
   @IsNumber()
-  @IsPositive({ message: ErrorMessages.ageShouldBeGreatherThanZero })
+  @IsPositive({ message: 'Age should be greather than zero.' })
   age: number
 
   @IsDefined()
