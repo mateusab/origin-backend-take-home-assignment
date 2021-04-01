@@ -8,7 +8,7 @@ export class User {
   dependents: number
   income: number
   marital_status: MaritalStatusEnum
-  risk_answers: boolean[]
+  risk_questions: boolean[]
   house: House
   vehicle?: Vehicle
   insurances: Insurance[]
@@ -18,7 +18,7 @@ export class User {
     dependents: number,
     income: number,
     marital_status: MaritalStatusEnum,
-    risk_answers: boolean[],
+    risk_questions: boolean[],
     house?: House,
     vehicle?: Vehicle,
   ) {
@@ -26,13 +26,13 @@ export class User {
     this.dependents = dependents
     this.income = income
     this.marital_status = marital_status
-    this.risk_answers = risk_answers
+    this.risk_questions = risk_questions
     this.house = house
     this.vehicle = vehicle
   }
 
   calculateBaseScore = (): number =>
-    this.risk_answers.filter(risk_answer => risk_answer).length
+    this.risk_questions.filter(risk_question => risk_question).length
 
   hasVehicle = (): boolean => this.vehicle.year !== undefined
 

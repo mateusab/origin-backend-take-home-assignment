@@ -5,7 +5,9 @@ import { InsuranceStatusEnum } from 'src/domain/insurance/enums/InsuranceStatusE
 @Injectable()
 export class CalculateUserHomeInsuranceRiskProfileUseCase {
   execute(homeInsurance: HomeInsurance): InsuranceStatusEnum {
-    if (!homeInsurance.user.hasHouse()) {
+    const userDoesNotHaveHouse = !homeInsurance.user.hasHouse()
+
+    if (userDoesNotHaveHouse) {
       return InsuranceStatusEnum.INELIGIBLE
     }
 

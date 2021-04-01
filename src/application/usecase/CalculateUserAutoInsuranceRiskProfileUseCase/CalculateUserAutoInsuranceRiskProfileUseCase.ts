@@ -3,7 +3,9 @@ import { InsuranceStatusEnum } from 'src/domain/insurance/enums/InsuranceStatusE
 
 export class CalculateUserAutoInsuranceRiskProfileUseCase {
   execute(autoInsurance: AutoInsurance): InsuranceStatusEnum {
-    if (!autoInsurance.user.hasVehicle()) {
+    const userDoesNotHaveVehicle = !autoInsurance.user.hasVehicle()
+
+    if (userDoesNotHaveVehicle) {
       return InsuranceStatusEnum.INELIGIBLE
     }
 

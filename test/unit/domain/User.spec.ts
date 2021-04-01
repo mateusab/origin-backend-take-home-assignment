@@ -8,9 +8,9 @@ describe('User', () => {
   let user: User
 
   describe('calculateBaseScore', () => {
-    describe('risk_answers having just one value true', () => {
+    describe('risk_questions having just one value true', () => {
       it('baseScore should be 1', () => {
-        user = createUserMock({ risk_answers: [false, true, false] })
+        user = createUserMock({ risk_questions: [false, true, false] })
 
         const response = user.calculateBaseScore()
 

@@ -61,8 +61,14 @@ export class CalculateUserRiskProfileInput {
   @IsArray({ message: 'risk_questions must be an array' })
   @ArrayMinSize(3, { message: 'risk_questions must have three positions.' })
   @ArrayMaxSize(3, { message: 'risk_questions must have three positions.' })
-  @Min(0, { each: true })
-  @Max(1, { each: true })
+  @Min(0, {
+    each: true,
+    message: 'risk_questions must be an array with boolean values',
+  })
+  @Max(1, {
+    each: true,
+    message: 'risk_questions must be an array with boolean values',
+  })
   risk_questions: number[]
 
   @IsOptional()

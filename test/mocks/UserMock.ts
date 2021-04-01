@@ -9,7 +9,7 @@ export const createUserMock = (params?: Partial<User>): User => {
   const dependents = 0
   const income = 0
   const marital_status = MaritalStatusEnum.MARRIED
-  const risk_answers = [false, true, false]
+  const risk_questions = [false, true, false]
   const house = new House(OwnershipStatusEnum.OWNED)
   const vehicle = new Vehicle(2018)
 
@@ -18,7 +18,7 @@ export const createUserMock = (params?: Partial<User>): User => {
     params.dependents ? params.dependents : dependents,
     params.income ? params.income : income,
     params.marital_status ? params.marital_status : marital_status,
-    params.risk_answers ? params.risk_answers : risk_answers,
+    params.risk_questions ? params.risk_questions : risk_questions,
     params.house ? params.house : house,
     params.vehicle ? params.vehicle : vehicle,
   )

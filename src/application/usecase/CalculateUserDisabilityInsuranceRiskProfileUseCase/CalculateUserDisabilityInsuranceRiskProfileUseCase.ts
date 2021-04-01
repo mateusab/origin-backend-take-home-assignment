@@ -5,10 +5,9 @@ import { InsuranceStatusEnum } from 'src/domain/insurance/enums/InsuranceStatusE
 @Injectable()
 export class CalculateUserDisabilityInsuranceRiskProfileUseCase {
   execute(disabilityInsurance: DisabilityInsurance): InsuranceStatusEnum {
-    if (
-      !disabilityInsurance.user.hasIncome() ||
-      disabilityInsurance.user.isOlderThanSixty()
-    ) {
+    const userDoesNotHaveIncome = !disabilityInsurance.user.hasIncome()
+
+    if (userDoesNotHaveIncome || disabilityInsurance.user.isOlderThanSixty()) {
       return InsuranceStatusEnum.INELIGIBLE
     }
 
